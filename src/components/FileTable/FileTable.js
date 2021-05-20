@@ -45,11 +45,15 @@ function FileTable() {
   const handleDownloadClick = () => {
     let message = "";
     content.forEach((item) => {
-      if (item.isChecked === true) {
+      if (
+        item.isChecked === true &&
+        item.status.toLowerCase() === "available"
+      ) {
         message += "Device: " + item.device + "\nPath: " + item.path + "\n\n";
       }
     });
-    message === "" ? alert("None selected") : alert(message);
+    message += "Note: Only Available devices can be downloaded";
+    alert(message);
   };
 
   return (
@@ -65,7 +69,11 @@ function FileTable() {
       <label htmlFor="all-checkbox">
         {selectedCount === 0 ? "None Selected" : "Selected " + selectedCount}
       </label>
-      <button className="download-button" onClick={handleDownloadClick}>
+      <button
+        className="download-button"
+        disabled={selectedCount === 0}
+        onClick={handleDownloadClick}
+      >
         <img
           aria-hidden="true"
           className="download-icon"

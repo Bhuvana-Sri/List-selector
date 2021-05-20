@@ -64,6 +64,12 @@ input[type="checkbox"] {
   border: none;
   cursor: pointer;
   font-size: 1.25em;
+  &:disabled {
+    cursor: not-allowed;
+    .download-icon {
+      opacity: 0.4;
+    }
+  }
 }
 .download-icon {
   width: 0.9em;
