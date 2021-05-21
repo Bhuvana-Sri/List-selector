@@ -52,7 +52,7 @@ function FileTable() {
         message += "Device: " + item.device + "\nPath: " + item.path + "\n\n";
       }
     });
-    message += "Note: Only Available devices can be downloaded";
+    message += "Note: Only Available devices may be downloaded";
     alert(message);
   };
 
@@ -70,6 +70,11 @@ function FileTable() {
         {selectedCount === 0 ? "None Selected" : "Selected " + selectedCount}
       </label>
       <button
+        title={
+          selectedCount === 0
+            ? "None selected"
+            : "Only Available devices may be downloaded"
+        }
         className="download-button"
         disabled={selectedCount === 0}
         onClick={handleDownloadClick}
