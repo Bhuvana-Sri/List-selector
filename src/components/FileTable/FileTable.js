@@ -43,16 +43,21 @@ function FileTable() {
   };
 
   const handleDownloadClick = () => {
-    let message = "";
+    let message = "",
+      scheduledCount = 0,
+      availableCount = 0;
     content.forEach((item) => {
-      if (
-        item.isChecked === true &&
-        item.status.toLowerCase() === "available"
-      ) {
-        message += "Device: " + item.device + "\nPath: " + item.path + "\n\n";
+      if (item.isChecked === true) {
+        if (item.status.toLowerCase() === "available") {
+          message += "Device: " + item.device + "\nPath: " + item.path + "\n\n";
+          availableCount++;
+        } else scheduledCount++;
       }
     });
-    message += "Note: Only Available devices may be downloaded";
+    if (availableCount === 0)
+      message += "Error: Scheduled devices cannot be downloaded";
+    else if (scheduledCount !== 0)
+      message += "Note: Results contain only Available devices";
     alert(message);
   };
 
